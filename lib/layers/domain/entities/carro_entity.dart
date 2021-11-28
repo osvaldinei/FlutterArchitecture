@@ -15,7 +15,7 @@ class CarroEntity {
 
   setLogica(){
     if(this.valorReal > 10000.00){
-        valor * 2;
+       valor *= 2;
     }
   }
 }

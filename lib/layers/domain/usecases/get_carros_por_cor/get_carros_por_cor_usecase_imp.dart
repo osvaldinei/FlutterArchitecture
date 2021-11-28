@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:arq/layers/domain/entities/carro_entity.dart';
 import 'package:arq/layers/domain/usecases/get_carros_por_cor/get_carros_por_cor_usecase.dart';
 
