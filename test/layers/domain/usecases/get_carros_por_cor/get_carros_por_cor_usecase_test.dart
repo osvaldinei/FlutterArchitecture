@@ -1,23 +1,15 @@
+import 'package:arq/layers/data/datasources/local/get_carros_por_cor_local_datasource_imp.dart';
+import 'package:arq/layers/data/repositories/get_carros_por_cor_repository_imp.dart';
 import 'package:arq/layers/domain/entities/carro_entity.dart';
 import 'package:arq/layers/domain/repositories/get_carros_por_cor_repository.dart';
 import 'package:arq/layers/domain/usecases/get_carros_por_cor/get_carros_por_cor_usecase.dart';
 import 'package:arq/layers/domain/usecases/get_carros_por_cor/get_carros_por_cor_usecase_imp.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class GetCarrosPorCorRepositoryImp implements GetCarrosPorCorRepository{
-  @override
-  CarroEntity call(String cor) {
-    if(cor.contains('vermelho')){
-      return CarroEntity(placa: 'ABC123', qtdPortas: 4, valor: 5000.00);
-    }
-    return CarroEntity(placa: 'QWE', qtdPortas: 2, valor: 2000.00);
-  }
-
-}
 
 main() {
   test('Deve retornar uma instancia de carro quando passado qualquer cor', () {
-    GetCarrosPorCorUseCase useCase = GetCarrosPorCorUseCaseImp(GetCarrosPorCorRepositoryImp(),);
+    GetCarrosPorCorUseCase useCase = GetCarrosPorCorUseCaseImp(GetCarrosPorCorRepositoryImp(GetCarrosPorCorLocalDataSourceImp()),);
 
     var result = useCase('azul');
 
@@ -25,7 +17,7 @@ main() {
   });
 
   test('Deve retornar um carro de quatro portas quando vermelho', () {
-    GetCarrosPorCorUseCase useCase = GetCarrosPorCorUseCaseImp(GetCarrosPorCorRepositoryImp(),);
+    GetCarrosPorCorUseCase useCase = GetCarrosPorCorUseCaseImp(GetCarrosPorCorRepositoryImp(GetCarrosPorCorLocalDataSourceImp()),);
 
     var result = useCase('vermelho');
 
@@ -33,7 +25,7 @@ main() {
   });
 
    test('Deve retornar um carro de duas portas quando vermelho', () {
-    GetCarrosPorCorUseCase useCase = GetCarrosPorCorUseCaseImp(GetCarrosPorCorRepositoryImp(),);
+    GetCarrosPorCorUseCase useCase = GetCarrosPorCorUseCaseImp(GetCarrosPorCorRepositoryImp(GetCarrosPorCorLocalDataSourceImp()),);
 
     var result = useCase('verde');
 
