@@ -1,6 +1,7 @@
 import 'package:arq/layers/data/datasources/get_carros_por_cor_datasource.dart';
 import 'package:arq/layers/data/dtos/carro_dto.dart';
 import 'package:arq/layers/domain/entities/carro_entity.dart';
+import 'package:dartz/dartz.dart';
 
 class GetCarrosPorCorLocalDataSourceImp implements GetCarrosPorCorDataSource {
   final jsonVermelho = {
@@ -16,10 +17,14 @@ class GetCarrosPorCorLocalDataSourceImp implements GetCarrosPorCorDataSource {
   };
 
   @override
-  CarroDto call(String cor) {
-    if (cor.contains('vermelho')){
-      return CarroDto.fromMap(jsonVermelho);
+  Either<Exception, CarroDto> call(String cor) {
+    try {
+      if (cor.contains('vermelho')) {
+        return Right(CarroDto.fromMap(jsonVermelho));
+      }
+      return Right(CarroDto.fromMap(jsonAny));
+    } catch (e) {
+      return Left(Exception('Error in DataSource'));
     }
-    return CarroDto.fromMap(jsonAny);
   }
 }
